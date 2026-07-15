@@ -1,11 +1,12 @@
-abstract interface class AuthRepository{
+abstract interface class AuthRepository {
   Future<bool> isLoggedIn();
 
-  Future<void> saveLogin(String mobileNumber);
+  Future<bool> verifyOtp({
+    required String mobileNumber,
+    required String otp,
+  });
 
   Future<void> logout();
-
-  Future<bool> verifyOtp(String otp);
 
   Future<String?> getLoggedInMobileNumber();
 }

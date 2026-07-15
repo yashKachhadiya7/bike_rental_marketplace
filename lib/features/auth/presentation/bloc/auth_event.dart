@@ -26,12 +26,19 @@ sealed class AuthEvent extends Equatable{
 
 /// User entered OTP
 final class VerifyOtp extends AuthEvent {
+  final String mobileNumber;
   final String otp;
 
-  const VerifyOtp(this.otp);
+  const VerifyOtp({
+    required this.mobileNumber,
+    required this.otp,
+  });
 
   @override
-  List<Object?> get props => [otp];
+  List<Object?> get props => [
+    mobileNumber,
+    otp,
+  ];
 }
 
 /// User logged out
