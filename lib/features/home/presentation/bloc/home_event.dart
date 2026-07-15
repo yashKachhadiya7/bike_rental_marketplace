@@ -10,3 +10,12 @@ sealed class HomeEvent extends Equatable {
 final class LoadProducts extends HomeEvent {
   const LoadProducts();
 }
+
+final class SearchProducts extends HomeEvent {
+  final String query;
+
+  const SearchProducts(this.query);
+
+  @override
+  List<Object?> get props => [query];
+}

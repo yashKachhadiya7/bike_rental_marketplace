@@ -17,7 +17,7 @@ class BikeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final available = BikeMapper.isAvailable(index);
+    final available = BikeMapper.isAvailable(product.id);
 
     return Card(
       elevation: 3,
@@ -49,7 +49,7 @@ class BikeCard extends StatelessWidget {
               const SizedBox(height: 16),
 
               Text(
-                BikeMapper.getBikeName(index),
+                BikeMapper.getBikeName(product.id),
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,

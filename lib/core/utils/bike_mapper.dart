@@ -14,11 +14,11 @@ class BikeMapper {
     'BMW G310R',
   ];
 
-  static String getBikeName(int index) {
-    return bikeNames[index % bikeNames.length];
+  static String getBikeName(int productId) {
+    return bikeNames[(productId - 1) % bikeNames.length];
   }
 
-  static bool isAvailable(int index) {
-    return index.isEven;
+  static bool isAvailable(int productId) {
+    return productId.isOdd;
   }
 }

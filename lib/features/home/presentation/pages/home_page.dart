@@ -60,8 +60,13 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: TextField(
+                    onChanged: (value) {
+                      context.read<HomeBloc>().add(
+                        SearchProducts(value),
+                      );
+                    },
                     decoration: InputDecoration(
-                      hintText: "Search Bikes",
+                      hintText: 'Search Bikes',
                       prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),

@@ -17,10 +17,7 @@ class BikeDetailsPage extends StatelessWidget {
 
     final ProductModel product = arguments.product;
 
-    final int index = arguments.index;
-
-    final bool available =
-    BikeMapper.isAvailable(index);
+    final bool available = BikeMapper.isAvailable(product.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +43,7 @@ class BikeDetailsPage extends StatelessWidget {
             const SizedBox(height: 24),
 
             Text(
-              BikeMapper.getBikeName(index),
+              BikeMapper.getBikeName(product.id),
               style: const TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
