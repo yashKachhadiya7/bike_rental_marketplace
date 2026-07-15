@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../features/auth/data/datasource/auth_local_data_source.dart';
 import '../../features/auth/data/repository/auth_repository_impl.dart';
 import '../../features/auth/domain/repository/auth_repository.dart';
-import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/home/data/data_source/home_remote_data_source.dart';
 import '../../features/home/data/repository/home_repository_impl.dart';
 import '../../features/home/domain/repository/home_repository.dart';

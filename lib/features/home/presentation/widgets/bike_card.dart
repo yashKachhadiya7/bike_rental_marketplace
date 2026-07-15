@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/bike_mapper.dart';
@@ -20,14 +21,6 @@ class BikeCard extends StatelessWidget {
     final available = BikeMapper.isAvailable(product.id);
 
     return Card(
-      elevation: 3,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: onTap,
@@ -39,11 +32,33 @@ class BikeCard extends StatelessWidget {
             children: [
 
               Center(
-                child: Image.network(
-                  product.image,
-                  height: 170,
-                  fit: BoxFit.contain,
-                ),
+                child: Hero(
+                  tag: product.id,
+                  child: CachedNetworkImage(
+                    imageUrl: product.image,
+                    height: 170,
+                    fit: BoxFit.contain,
+
+                    placeholder: (context, url) {
+                      return const SizedBox(
+                        height: 170,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+
+                    errorWidget: (context, url, error) {
+                      return const SizedBox(
+                        height: 170,
+                        child: Icon(
+                          Icons.broken_image,
+                          size: 80,
+                        ),
+                      );
+                    },
+                  ),
+                )
               ),
 
               const SizedBox(height: 16),

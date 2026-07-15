@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/routes/app_routes.dart';
@@ -33,11 +34,33 @@ class BikeDetailsPage extends StatelessWidget {
           children: [
 
             Center(
-              child: Image.network(
-                product.image,
-                height: 250,
-                fit: BoxFit.contain,
-              ),
+              child: Hero(
+                tag: product.id,
+                child: CachedNetworkImage(
+                  imageUrl: product.image,
+                  height: 170,
+                  fit: BoxFit.contain,
+
+                  placeholder: (context, url) {
+                    return const SizedBox(
+                      height: 170,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+
+                  errorWidget: (context, url, error) {
+                    return const SizedBox(
+                      height: 170,
+                      child: Icon(
+                        Icons.broken_image,
+                        size: 80,
+                      ),
+                    );
+                  },
+                ),
+              )
             ),
 
             const SizedBox(height: 24),
@@ -120,7 +143,6 @@ class BikeDetailsPage extends StatelessWidget {
 
             SizedBox(
               width: double.infinity,
-              height: 50,
               child: ElevatedButton(
                 onPressed: available
                     ? () {

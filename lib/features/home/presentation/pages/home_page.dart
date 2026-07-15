@@ -53,6 +53,8 @@ class _HomePageState extends State<HomePage> {
             );
           }
 
+
+
           if(state is HomeLoaded){
 
             return Column(
@@ -65,38 +67,67 @@ class _HomePageState extends State<HomePage> {
                         SearchProducts(value),
                       );
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Search Bikes',
-                      prefixIcon: const Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      prefixIcon: Icon(Icons.search),
                     ),
                   ),
                 ),
 
                 Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    itemCount: state.products.length,
-                    itemBuilder: (context, index) {
-                      final product = state.products[index];
-
-                      return BikeCard(
-                        product: product,
-                        index: index,
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.bikeDetails,
-                            arguments: BikeDetailsArguments(
-                              product: product,
-                              index: index,
-                            ),
-                          );
-                        },
+                  child: state.products.isEmpty ?
+                  const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.search_off,
+                          size: 80,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'No Bikes Found',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Try another search keyword.',
+                        ),
+                      ],
+                    ),
+                  ) :
+                  RefreshIndicator(
+                    onRefresh: () async {
+                      context.read<HomeBloc>().add(
+                        const LoadProducts(),
                       );
                     },
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      itemCount: state.products.length,
+                      itemBuilder: (context, index) {
+                        final product = state.products[index];
+
+                        return BikeCard(
+                          product: product,
+                          index: index,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.bikeDetails,
+                              arguments: BikeDetailsArguments(
+                                product: product,
+                                index: index,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
