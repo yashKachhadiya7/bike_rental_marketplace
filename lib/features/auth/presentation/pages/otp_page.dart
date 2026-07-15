@@ -33,7 +33,7 @@ class _OtpPageState extends State<OtpPage> {
         if (state is Authenticated) {
           Navigator.pushReplacementNamed(
             context,
-            AppRoutes.login,
+            AppRoutes.home,
           );
         }
 

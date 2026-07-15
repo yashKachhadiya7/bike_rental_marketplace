@@ -31,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
         if (state is Authenticated) {
           Navigator.pushReplacementNamed(
             context,
-            AppRoutes.login,
+            AppRoutes.home,
           );
         }
         if(state is Unauthenticated){

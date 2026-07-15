@@ -1,3 +1,4 @@
+import 'package:bike_rental_marketplace/features/home/presentation/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +19,11 @@ class MyApp extends StatelessWidget {
             DependencyInjection.authRepository,
           ),
         ),
+        BlocProvider(
+          create: (context) => HomeBloc(
+              DependencyInjection.homeRepository,
+          ),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
